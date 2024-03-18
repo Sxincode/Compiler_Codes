@@ -3,13 +3,13 @@
 /* DESCRIPTION/DEFINITION SECTION */
 %{
 #include<stdio.h>
-int lc=0,sc=0,tc=0,ch=0,wc=0;	// GLOBAL VARIABLES
+int lc=0,sc=0,tc=0;	// GLOBAL VARIABLES
 %}
 
 // RULE SECTION
 %%
-[\n] { lc++; ch+=yyleng;} [ \t] { sc++; ch+=yyleng;} [^\t] { tc++; ch+=yyleng;}
-[^\t\n ]+ { wc++; ch+=yyleng;}
+[\n] { lc++;} 
+[ \t]{ if(yytext[0] == ' ') sc++; else tc++;}
 %%
 
 int yywrap(){ return 1; }
@@ -17,9 +17,11 @@ int yywrap(){ return 1; }
 
 // MAIN FUNCTION
 int main(){
-printf("Enter the Sentence : "); yylex();
-printf("Number of lines : %d\n",lc); printf("Number of spaces : %d\n",sc);
-printf("Number of tabs, words, charc : %d , %d , %d\n",tc,wc,ch);
+printf("Enter the Sentence : "); 
+yylex();
+printf("Number of lines : %d\n",lc); 
+printf("Number of spaces : %d\n",sc);
+printf("Number of tabs : %d\n",tc);
 
 return 0;
 }
