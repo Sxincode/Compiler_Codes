@@ -1,6 +1,7 @@
 /*1. Lex code to count total number of tokens */
 
 %{ 
+#include<stdio.h>
 int n = 0 ; 
 %} 
 
@@ -8,10 +9,7 @@ int n = 0 ;
 %% 
 
 //count number of keywords 
-"while"|"if"|"else" {n++;printf("\t keywords : %s", yytext);} 
-
-// count number of keywords 
-"int"|"float" {n++;printf("\t keywords : %s", yytext);} 
+"while"|"if"|"else"|"int"|"float" {n++;printf("\t keywords : %s", yytext);} 
 
 // count number of identifiers 
 [a-zA-Z_][a-zA-Z0-9_]* {n++;printf("\t identifier : %s", yytext);} 
